@@ -1,8 +1,17 @@
 from rest_framework.permissions import BasePermission
 
+
 class IsCandidate(BasePermission):
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.role == 'CANDIDATE'
+            and request.user.groups.filter(name="CANDIDATE").exists()
+        )
+
+
+class IsEmployer(BasePermission):
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated
+            and request.user.groups.filter(name="EMPLOYER").exists()
         )

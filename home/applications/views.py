@@ -15,6 +15,7 @@ class ApplicationCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         job = serializer.validated_data['job']
+
         if not job.is_active:
             raise ValidationError(
                 "This job is no longer active."
@@ -24,7 +25,6 @@ class ApplicationCreateAPIView(generics.CreateAPIView):
             job=job,
             candidate=self.request.user
         ).exists():
-
             raise ValidationError(
                 "You have already applied for this job."
             )
@@ -44,7 +44,7 @@ class MyApplicationsAPIView(generics.ListAPIView):
             'job',
             'candidate'
         )
-        
+
 class EmployerApplicationsAPIView(generics.ListAPIView):
     serializer_class = ApplicationSerializer
     permission_classes = [IsAuthenticated]
