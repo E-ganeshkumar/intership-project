@@ -35,6 +35,7 @@ class ApplicationCreateAPIView(generics.CreateAPIView):
 
 class MyApplicationsAPIView(generics.ListAPIView):
     serializer_class = ApplicationSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Application.objects.filter(
@@ -43,6 +44,7 @@ class MyApplicationsAPIView(generics.ListAPIView):
             'job',
             'candidate'
         )
+        
 class EmployerApplicationsAPIView(generics.ListAPIView):
     serializer_class = ApplicationSerializer
     permission_classes = [IsAuthenticated]

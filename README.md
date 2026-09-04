@@ -40,8 +40,7 @@ job_recruitment_api/
 ├── home/
 │   ├── settings.py
 │   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
+│  
 │
 ├── users/
 │   ├── migrations/
